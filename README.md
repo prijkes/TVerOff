@@ -54,6 +54,7 @@ The **TVerOff** tile appears in the launcher.
 4. **Details** shows the state (TVer version, patch in place, monitor) and the log.
 
 Over SSH the same thing is `…/com.tveroff.patcher/tools/tverctl.sh start|stop|status|autostart_toggle`.
+Logs live in `/var/lib/webosbrew/tveroff/` and survive reboots, so you can read what the boot hook did afterwards.
 
 <p><img src="docs/toast.jpg" width="48%" alt="toast shown when TVer opens"></p>
 
@@ -67,8 +68,9 @@ notices, puts the file back and restarts TVer one time. At boot the same repair 
 
 Removed the app while the service was running? The monitor notices that its files are gone (the next time anything
 changes on the TV's screen, after a 30 s grace period so that an upgrade-in-place is not mistaken for an uninstall) and
-removes the patch and the autostart entry by itself. If the service was not running, clean up by hand:
-`rm -rf /media/cryptofs/apps/usr/palm/applications/jp.co.tver.tvapp/webOSUserScripts /var/lib/webosbrew/init.d/50-custom-tveroff`
+removes the patch and the autostart entry by itself; a small log directory remains under `/var/lib/webosbrew/tveroff/`
+(delete it too if you like). If the service was not running, clean up by hand:
+`rm -rf /media/cryptofs/apps/usr/palm/applications/jp.co.tver.tvapp/webOSUserScripts /var/lib/webosbrew/init.d/50-custom-tveroff /var/lib/webosbrew/tveroff`
 
 ## Troubleshooting
 

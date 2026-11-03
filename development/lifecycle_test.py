@@ -21,6 +21,7 @@ from tvlink import TV, TVER_ID, TVER_DIR, APP_ID  # noqa: E402
 APP_DIR = "/media/developer/apps/usr/palm/applications/" + APP_ID
 PATCH = TVER_DIR + "/webOSUserScripts/userScript.js"
 BOOT = "/var/lib/webosbrew/init.d/50-custom-tveroff"
+LOG_DIR = "/var/lib/webosbrew/tveroff"
 failures = []
 
 
@@ -75,7 +76,7 @@ def main():
 
         print("2. files vanish for a moment (what an upgrade does) - must NOT be treated as an uninstall")
         # only the payload directory moves: moving the whole app folder could make SAM drop the app from its list
-        tv.run(": > /tmp/tveroff/monitor.log; mv %s/payload %s/payload.away" % (APP_DIR, APP_DIR))
+        tv.run(": > %s/monitor.log; mv %s/payload %s/payload.away" % (LOG_DIR, APP_DIR, APP_DIR))
         tv.launch(TVER_ID)
         time.sleep(6)
         tv.run("mv %s/payload.away %s/payload" % (APP_DIR, APP_DIR))
@@ -84,7 +85,7 @@ def main():
         check("patch file still there", tv.exists(PATCH))
         check("autostart entry still there", tv.run("ls %s 2>/dev/null" % BOOT).strip() != "")
         check("monitor still alive", monitor_alive(tv))
-        check("monitor did not log an uninstall", "uninstalled" not in tv.run("cat /tmp/tveroff/monitor.log"))
+        check("monitor did not log an uninstall", "uninstalled" not in tv.run("cat %s/monitor.log" % LOG_DIR))
 
         print("3. real uninstall while the service is running")
         last = tv.remove()
@@ -96,7 +97,7 @@ def main():
         check("patch file removed by the monitor", not tv.exists(PATCH))
         check("autostart entry removed by the monitor", tv.run("ls %s 2>/dev/null" % BOOT).strip() == "")
         check("monitor exited", not monitor_alive(tv))
-        check("monitor logged why", "uninstalled" in tv.run("cat /tmp/tveroff/monitor.log"))
+        check("monitor logged why", "uninstalled" in tv.run("cat %s/monitor.log" % LOG_DIR))
     finally:
         print("4. restore")
         tv.close(TVER_ID)

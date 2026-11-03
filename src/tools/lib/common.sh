@@ -16,16 +16,19 @@ PAYLOAD="$PATCHER_DIR/payload/userScript.js"
 ICON="$PATCHER_DIR/icon.png"
 
 BASE="/tmp/tveroff"
-LOG="$BASE/tveroff.log"
-MONITOR_PID="$BASE/monitor.pid"
-MONITOR_LOG="$BASE/monitor.log"
-REPAIR_STAMP="$BASE/last_repair"
+# Logs live under /var/lib/webosbrew/ (not /tmp): they survive a reboot, so what the boot hook did
+# can still be read afterwards - and it is where webosbrew expects startup scripts to report.
+LOG_DIR="/var/lib/webosbrew/tveroff"
+LOG="$LOG_DIR/tveroff.log"
+MONITOR_PID="$BASE/monitor.pid"    # transient by nature
+MONITOR_LOG="$LOG_DIR/monitor.log"
+REPAIR_STAMP="$LOG_DIR/last_repair"
 
 AUTOSTART_DIR="/var/lib/webosbrew/init.d"
 AUTOSTART_ENTRY="50-custom-tveroff"
 AUTOSTART_SCRIPT="$TOOLS_DIR/autostart.sh"
 
-mkdir -m 777 -p "$BASE" 2>/dev/null
+mkdir -m 777 -p "$BASE" "$LOG_DIR" 2>/dev/null
 
 log() {
   [ -f "$LOG" ] || : > "$LOG"
