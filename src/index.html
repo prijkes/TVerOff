@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1920,height=1080,initial-scale=1">
+  <title>TVerOff</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="safe">
+    <div class="layout">
+      <nav class="rail">
+        <button id="svcBtn" class="navbtn item" type="button">Start Service</button>
+        <button id="launchBtn" class="navbtn item" type="button">Open TVer</button>
+        <button id="detailsBtn" class="navbtn item" type="button">Details</button>
+      </nav>
+
+      <main class="content">
+        <section class="card">
+          <header class="brand">
+            <div class="logo">TVer<span>Off</span></div>
+            <div class="tag">Ad-free playback for the TVer app</div>
+          </header>
+          <hr>
+
+          <div class="line">
+            <div class="k">Ad blocking</div>
+            <div class="v"><span id="pill" class="pill unknown">&hellip;</span></div>
+          </div>
+
+          <div class="line">
+            <div class="k">Start at boot</div>
+            <div class="v">
+              <button id="autoBtn" class="item switch" type="button" aria-pressed="false"><span class="knob"></span></button>
+            </div>
+          </div>
+
+          <div id="note" class="note hidden"></div>
+
+          <div id="details" class="hidden">
+            <div class="h2">Status</div>
+            <div id="facts" class="facts"></div>
+            <div class="h2">Log</div>
+            <textarea id="log" class="item" readonly placeholder="No output yet"></textarea>
+            <div class="actions">
+              <button id="helpBtn" class="btn item" type="button">How it works</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="helpLayer" class="overlay hidden">
+    <div class="shade"></div>
+    <div class="popup" role="dialog" aria-modal="true">
+      <div class="popTitle">How it works</div>
+      <p>TVer's ads are stitched into the video by TVer's servers. The TVer app asks for that stitched stream
+         with <code>ssai=1</code>; TVerOff makes the one request ask for the plain stream instead
+         (<code>ssai=0</code>), exactly like TVer's own previews do.</p>
+      <p>To do that it places one small file inside the TVer app folder
+         (<code>webOSUserScripts/userScript.js</code>) which webOS loads into TVer's pages. Nothing else on the TV
+         is changed, and <b>Stop Service</b> removes the file again.</p>
+      <p class="dim">After an update of the TVer app, open TVer once: TVerOff puts its file back and restarts TVer.
+         Over SSH:&nbsp;<code>/media/developer/apps/usr/palm/applications/com.tveroff.patcher/tools/tverctl.sh status</code></p>
+      <button id="closeBtn" class="btn item" type="button">Close</button>
+    </div>
+  </div>
+
+  <div id="loading" class="overlay hidden" aria-live="polite">
+    <div class="shade"></div>
+    <div class="loadCard">
+      <div class="spinner" aria-hidden="true"></div>
+      <div id="loadText" class="loadText">Working&hellip;</div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

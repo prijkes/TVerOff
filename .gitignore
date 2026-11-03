@@ -1,0 +1,7 @@
+# build output
+dist/
+
+# local tooling
+__pycache__/
+*.pyc
+node_modules/

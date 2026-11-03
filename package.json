@@ -1,0 +1,11 @@
+{
+  "name": "tveroff",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ad-free playback for the stock TVer app on rooted LG webOS TVs",
+  "license": "MIT",
+  "scripts": {
+    "test": "node test/userscript.test.js",
+    "icons": "python build/make-icons.py"
+  }
+}
