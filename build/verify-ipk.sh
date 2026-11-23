@@ -3,7 +3,7 @@
 #   exec bits present, no CR in scripts/configs/payload, sh syntax valid (busybox ash), payload byte-identical
 #   to the tested source, nothing owned by a non-root uid.
 #
-#   sh build/verify-ipk.sh dist/com.tveroff.patcher_0.1.0_all.ipk
+#   sh build/verify-ipk.sh dist/com.github.prijkes.tveroff_<version>_all.ipk
 set -eu
 
 IPK="$(readlink -f "$1")"

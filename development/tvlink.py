@@ -2,7 +2,7 @@
 """Developer tooling for a rooted webOS TV. Not needed to *use* TVerOff.
 
   set TV_HOST=<tv-ip>                  (TV_PASS defaults to "alpine", the Homebrew Channel SSH default)
-  python development/tvlink.py install dist/com.tveroff.patcher_0.1.0_all.ipk
+  python development/tvlink.py install dist/com.github.prijkes.tveroff_<version>_all.ipk
   python development/tvlink.py remove
   python development/tvlink.py ctl status        # runs the installed tverctl.sh (status|start|stop|autostart_toggle)
   python development/tvlink.py shot out.jpg      # screenshot of what the TV is showing right now
@@ -23,7 +23,7 @@ import paramiko
 
 TVER_ID = "jp.co.tver.tvapp"
 TVER_DIR = "/media/cryptofs/apps/usr/palm/applications/" + TVER_ID
-APP_ID = "com.tveroff.patcher"
+APP_ID = "com.github.prijkes.tveroff"
 CTL = "/media/developer/apps/usr/palm/applications/%s/tools/tverctl.sh" % APP_ID
 
 

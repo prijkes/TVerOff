@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  var APP_ID = 'com.tveroff.patcher';
+  var APP_ID = 'com.github.prijkes.tveroff';
   var TVER_ID = 'jp.co.tver.tvapp';
   var CTL = '/media/developer/apps/usr/palm/applications/' + APP_ID + '/tools/tverctl.sh';
 

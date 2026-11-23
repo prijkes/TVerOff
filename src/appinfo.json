@@ -1,7 +1,7 @@
 {
-  "id": "com.tveroff.patcher",
-  "version": "0.1.1",
-  "vendor": "tveroff",
+  "id": "com.github.prijkes.tveroff",
+  "version": "0.1.2",
+  "vendor": "prijkes",
   "type": "web",
   "main": "index.html",
   "title": "TVerOff",

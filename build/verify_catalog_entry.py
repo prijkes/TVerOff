@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Validate a webosbrew apps-repo package entry against the fields repogen's PackageRegistry allows.
 
-  python build/verify_catalog_entry.py dist/com.tveroff.patcher.yml
+  python build/verify_catalog_entry.py build/com.github.prijkes.tveroff.yml
 """
 import sys
 import urllib.request

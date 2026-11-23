@@ -106,17 +106,17 @@ requests of its own.
 TVerOff is listed in the Homebrew Channel app catalog via [webosbrew/apps-repo](https://github.com/webosbrew/apps-repo).
 The catalog stores a *pointer*, not the IPK; the chain is:
 
-1. Each GitHub release carries two assets: the IPK **and** `com.tveroff.patcher.manifest.json`
+1. Each GitHub release carries two assets: the IPK **and** `com.github.prijkes.tveroff.manifest.json`
    (fields: id/version/type/title from the IPK's appinfo.json, `appDescription` hand-added, `iconUri`/`sourceUrl`
    supplied, `rootRequired: true`, and `ipkUrl`/`ipkSize`/`ipkHash.sha256` of exactly that IPK).
    Generated with webosbrew's official tool from [dev-toolbox-cli](https://github.com/webosbrew/dev-toolbox-cli):
    `webosbrew-gen-manifest --pkgfile <ipk> --icon <icon-url> --link <source-url> --root true --output <manifest>`.
-2. `packages/com.tveroff.patcher.yml` in apps-repo points at
-   `https://github.com/prijkes/TVerOff/releases/latest/download/com.tveroff.patcher.manifest.json` — a
+2. `packages/com.github.prijkes.tveroff.yml` in apps-repo points at
+   `https://github.com/prijkes/TVerOff/releases/latest/download/com.github.prijkes.tveroff.manifest.json` — a
    `releases/latest` path, so a new release reaches HBC users **without another PR**.
-3. `build/com.tveroff.patcher.yml` in this repo is the copy of that entry (verify with
-   `python build/verify_catalog_entry.py build/com.tveroff.patcher.yml`); the submission PR that added
-   `packages/com.tveroff.patcher.yml` to apps-repo carries the review and the CI compatibility report.
+3. `build/com.github.prijkes.tveroff.yml` in this repo is the copy of that entry (verify with
+   `python build/verify_catalog_entry.py build/com.github.prijkes.tveroff.yml`); the submission PR that added
+   `packages/com.github.prijkes.tveroff.yml` to apps-repo carries the review and the CI compatibility report.
 
 So a normal release is: bump version in `appinfo.json` + `package.json` + payload `VERSION`, build + verify,
 test on the TV, tag, attach IPK + freshly generated manifest. The catalog entry only needs a PR when something

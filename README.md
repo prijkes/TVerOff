@@ -33,13 +33,13 @@ pre-roll; TVerOff = plain manifest, none of those, programme starts immediately.
 
 ## Install
 
-Build it (see [Building](#building)) or use `dist/com.tveroff.patcher_0.1.0_all.ipk`, then install with any of:
+Build it (see [Building](#building)) or download the IPK from the [latest release](https://github.com/prijkes/TVerOff/releases/latest), then install with any of:
 
 * **Dev Manager** ([webosbrew/dev-manager-desktop](https://github.com/webosbrew/dev-manager-desktop)): add the TV, "Apps",
   install IPK. (On webOS 11 prefer this over Homebrew Channel's own install button; see the guide, section 6.)
-* **`ares-install`**: `ares-install -d <tv> dist/com.tveroff.patcher_0.1.0_all.ipk`
+* **`ares-install`**: `ares-install -d <tv> com.github.prijkes.tveroff_<version>_all.ipk`
 * **SSH** (what was used for testing; `pip install paramiko`): `set TV_HOST=<tv ip>` then
-  `python development/tvlink.py install dist/com.tveroff.patcher_0.1.0_all.ipk`
+  `python development/tvlink.py install com.github.prijkes.tveroff_<version>_all.ipk`
   (copies the IPK to the TV and calls `luna://com.webos.appInstallService/dev/install`, the call Homebrew Channel makes).
 
 The **TVerOff** tile appears in the launcher.
@@ -53,7 +53,7 @@ The **TVerOff** tile appears in the launcher.
    playback starts, and a toast confirms when TVer opens. The programme starts without commercials.
 4. **Details** shows the state (TVer version, patch in place, monitor) and the log.
 
-Over SSH the same thing is `…/com.tveroff.patcher/tools/tverctl.sh start|stop|status|autostart_toggle`.
+Over SSH the same thing is `…/com.github.prijkes.tveroff/tools/tverctl.sh start|stop|status|autostart_toggle`.
 Logs live in `/var/lib/webosbrew/tveroff/` and survive reboots, so you can read what the boot hook did afterwards.
 
 <p><img src="docs/toast.jpg" width="48%" alt="toast shown when TVer opens"></p>
@@ -64,7 +64,7 @@ notices, puts the file back and restarts TVer one time. At boot the same repair 
 ## Uninstall
 
 1. In TVerOff: **Stop Service** (removes the file from TVer's folder), and switch **Start at boot** off.
-2. Remove the app (Dev Manager, or `luna-send -n 1 luna://com.webos.appInstallService/dev/remove '{"id":"com.tveroff.patcher"}'`).
+2. Remove the app (Dev Manager, or `luna-send -n 1 luna://com.webos.appInstallService/dev/remove '{"id":"com.github.prijkes.tveroff"}'`).
 
 Removed the app while the service was running? The monitor notices that its files are gone (the next time anything
 changes on the TV's screen, after a 30 s grace period so that an upgrade-in-place is not mistaken for an uninstall) and
@@ -118,7 +118,7 @@ It runs the payload tests, builds from a clean LF-normalised copy with explicit 
 ## Layout
 
 ```
-src/                    the app that is packaged (id com.tveroff.patcher)
+src/                    the app that is packaged (id com.github.prijkes.tveroff)
   index.html css/ js/   the TV UI (D-pad + Magic Remote), talks to tverctl.sh via Homebrew Channel exec
   tools/tverctl.sh      start | stop | status | autostart_toggle -> prints one JSON state line
   tools/autostart.sh    boot hook, /var/lib/webosbrew/init.d/50-custom-tveroff points here

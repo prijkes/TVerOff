@@ -2,7 +2,7 @@
 # TVerOff - shared helpers. busybox sh, runs as root (Homebrew Channel exec / init.d).
 # The entry script sets TOOLS_DIR before sourcing this file.
 
-APP_ID="com.tveroff.patcher"
+APP_ID="com.github.prijkes.tveroff"
 TVER_ID="jp.co.tver.tvapp"
 TVER_BASE_DIR="/media/cryptofs/apps/usr/palm/applications"
 TVER_DIR="$TVER_BASE_DIR/$TVER_ID"
@@ -41,7 +41,7 @@ die() {
 }
 
 require_root() {
-  [ "$(id -u 2>/dev/null)" = "0" ] || die "not root (must be run through the Homebrew Channel exec service)"
+  [ "$(id -u 2>/dev/null)" = "0" ] || die "not root - TVerOff needs a rooted TV (the Homebrew Channel exec service must run as root)"
 }
 
 # luna-send reads stdin if it is a pipe/tty, so always detach it; never wait forever on the bus.

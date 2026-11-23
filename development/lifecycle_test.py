@@ -2,7 +2,7 @@
 """On-device lifecycle test: install -> upgrade in place -> uninstall, with the service running.
 
   set TV_HOST=<tv-ip>
-  python development/lifecycle_test.py dist/com.tveroff.patcher_0.1.0_all.ipk
+  python development/lifecycle_test.py dist/com.github.prijkes.tveroff_<version>_all.ipk
 
 Checks that
   * a fresh install can be started (patch file byte-identical to the payload, monitor alive, autostart entry set),
